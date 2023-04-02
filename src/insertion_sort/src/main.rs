@@ -1,7 +1,7 @@
 fn main() {
     let mut a = [7, 6, 5, 4, 3, 2, 1, 0];
 
-    // Start from one because an array is 0-indexed in Rust
+    // Start from one because arrays are 0-indexed in Rust
     for j in 1..a.len() {
         // key is a number that we want to sort
         let key = a[j];
