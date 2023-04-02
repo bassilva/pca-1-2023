@@ -1,4 +1,14 @@
-## Running from Docker
+## Installing rustup on Linux
+
+Follow the [Installation page](https://www.rust-lang.org/tools/install) instructions:
+
+```
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
+
+Add `~/.cargo/bin` to your PATH variable.
+
+## Running with Docker
 
 [Install Docker](https://docs.docker.com/engine/install/) and run the following command from this directory to build the image:
 
@@ -11,6 +21,7 @@ Execute the command bellow to run your new docker image with the Rust developmen
 ```
 docker run -d -it --name rust-dev \
    --mount type=bind,source="$(pwd)/src,target=/root/src" \
+   --mount type=bind,source="${HOME},target=${HOME},readonly" \
    --name rust-dev \
    rust-dev:latest
 ```
