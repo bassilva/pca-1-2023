@@ -8,6 +8,10 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 Add `~/.cargo/bin` to your PATH variable.
 
+## Learning Rust
+
+[The Rust Programming Language](https://doc.rust-lang.org/book/) is an online book that covers most of Rust's basic (and maybe even more advanced?) concepts.
+
 ## Running with Docker
 
 [Install Docker](https://docs.docker.com/engine/install/) and run the following command from this directory to build the image:
