@@ -1,0 +1,39 @@
+WHITESPACE = _{ " " | "\t" }
+ident = @{ ASCII_ALPHA ~ (ASCII_ALPHANUMERIC | "_")* ~ "'"* }
+number = @{ ASCII_DIGIT+ }
+boolean = @{ "true" | "false" }
+
+// Operators
+Num = { ("+" | "-")? ~ number}
+Var = { ident }
+Lab = { (Num | Var)* }
+
+// Arithmetic
+Opa = _{ subtract | add | multiply | divide }
+add         = { "+" }
+subtract    = { "-" }
+multiply    = { "*" }
+divide      = { "/" }
+
+aleaf = _{ Var | Num }
+AExp = { aleaf ~ (Opa ~ aleaf)* }
+
+// Boolean
+Opb = _{ eqb | neq | gt | gte | lt | lte | not }
+eqb = { "==" }
+neq = { "!==" | "<>"}
+gt = { ">" }
+gte = { ">=" }
+lt = { "<" }
+lte = { "<=" }
+not = { "not" | "~" }
+
+bleaf = _{ Var | boolean }
+BExp = { (bleaf ~ (Opb ~ bleaf)*) | (not ~ BExp) }
+
+block_expr = { "(" ~ AExp ~ ")" }
+
+
+
+
+
