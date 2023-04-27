@@ -37,7 +37,7 @@ Statement = _{ assignment | conditional | loopwhile | print | write | read | ski
 assignment = { Var ~ ":=" ~ AExp }
 conditional = { "if" ~ BExp ~ "then" ~ Block ~ "else" ~ Block }
 loopwhile = { "while" ~ BExp ~ "do" ~ Block }
-print = { "print" ~ text }
+print = { "print" ~ (AExp | text) }
 write = { "write" ~ AExp }
 read = { "read" }
 skip = { "skip" }
