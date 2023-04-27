@@ -35,7 +35,7 @@ BExp = { (bleaf ~ (Opb ~ bleaf)*) | (not ~ BExp) }
 // Statements
 Statement = _{ assignment | conditional | loopwhile | print | write | read | skip}
 assignment = { Var ~ ":=" ~ AExp }
-conditional = { "if" ~ BExp ~ "then" ~ Block ~ "else" ~ Block }
+conditional = { "if" ~ BExp ~ "then" ~ Block ~ ("else" ~ Block)? }
 loopwhile = { "while" ~ BExp ~ "do" ~ Block }
 print = { "print" ~ (AExp | text) }
 write = { "write" ~ AExp }
