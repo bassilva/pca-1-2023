@@ -2,6 +2,7 @@ WHITESPACE = _{ " " | "\t" }
 ident = @{ ASCII_ALPHA ~ (ASCII_ALPHANUMERIC | "_")* ~ "'"* }
 number = @{ ASCII_DIGIT+ }
 boolean = @{ "true" | "false" }
+text = @{ "\"" ~ (!"\"" ~ ANY)* ~ "\"" }
 
 // Operators
 Num = { ("+" | "-")? ~ number}
@@ -31,8 +32,19 @@ not = { "not" | "~" }
 bleaf = _{ Var | boolean }
 BExp = { (bleaf ~ (Opb ~ bleaf)*) | (not ~ BExp) }
 
-block_expr = { "(" ~ AExp ~ ")" }
+// Statements
+Statement = _{ assignment | conditional | loopwhile | print | write | read | skip}
+assignment = { Var ~ ":=" ~ AExp }
+conditional = { "if" ~ BExp ~ "then" ~ Block ~ "else" ~ Block }
+loopwhile = { "while" ~ BExp ~ "do" ~ Block }
+print = { "print" ~ text }
+write = { "write" ~ AExp }
+read = { "read" }
+skip = { "skip" }
 
+// Blocks
+Block = { "{" ~ Statement* ~ "}" }
+Start = { Block }
 
 
 
