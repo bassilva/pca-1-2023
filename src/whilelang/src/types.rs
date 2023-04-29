@@ -20,54 +20,49 @@ pub enum Opr {
     Le,
 }
 
-pub struct A1OpaA2 {
-    a1: i32,
-    a2: i32,
-    opa: Opa,
-}
-
-pub struct B1OpbA2 {
-    b1: bool,
-    ab: i32,
-    opb: Opb,
-}
-
-pub struct B1OprA2 {
-    b1: bool,
-    ab: i32,
-    opb: Opb,
-}
-
 pub enum Value {
     Bool(bool),
     Var(String),
     Num(i32),
 }
 
-pub struct Var {
-    pub name: String,
-    pub value: Value,
+pub struct A1OpaA2 {
+    pub a1: Value,
+    pub a2: Value,
+    pub opa: Opa,
+}
+
+pub struct B1OpbB2 {
+    pub b1: Value,
+    pub b2: Value,
+    pub opb: Opb,
+}
+
+pub struct A1OprA2 {
+    pub a1: Value,
+    pub a2: Value,
+    pub opr: Opr,
 }
 
 pub enum AExp {
-    Var(Var),
-    Num(Var),
+    Var(Value),
+    Num(Value),
     AritheticOp(A1OpaA2),
 }
 
 pub enum BExp {
     Boolean,
     NotBoolean,
-    BooleanOp(B1OpbA2),
-    RelationalOp(B1OprA2),
+    BooleanOp(B1OpbB2),
+    RelationalOp(A1OprA2),
 }
 
 pub struct While {
     pub cond: BExp,
-    pub statements: Vec<Statement>,
+    pub statements: WhileProgram,
 }
 
-pub enum Statement {
+pub enum Stmt {
     Arithm(AExp),
     Boolean(BExp),
     Skip,
@@ -77,7 +72,14 @@ pub enum Statement {
     // While(While),
 }
 
+pub struct Statement {
+    pub lValue: Stmt,
+    pub rValue: Option<Stmt>,
+}
+
 pub struct WhilelangType {
     pub statement: Statement,
-    pub label: Option<i32>,
+    pub label: i32,
 }
+
+pub type WhileProgram = Vec<WhilelangType>;

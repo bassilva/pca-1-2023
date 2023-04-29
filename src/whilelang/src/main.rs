@@ -67,12 +67,72 @@ fn main() {
     println!("{:?}", successful_parse_stmt10);
     println!("{:?}", successful_parse_stmt11);
 
-    let mut program: Vec<types::WhilelangType> = Vec::new();
-    program.push(types::WhilelangType {
-        label: Some(1),
-        statement: types::Statement::Arithm(types::AExp::Var(types::Var {
-            name: String::from("x"),
-            value: types::Value::Var(String::from("y")),
-        })),
-    });
+    let inner_loop: types::WhileProgram = vec![
+        types::WhilelangType {
+            label: 4,
+            statement: types::Statement {
+                lValue: types::Stmt::Arithm(types::AExp::Var(types::Value::Var(String::from("z")))),
+                rValue: Some(types::Stmt::Arithm(types::AExp::AritheticOp(
+                    types::A1OpaA2 {
+                        a1: types::Value::Var(String::from("z")),
+                        a2: types::Value::Var(String::from("y")),
+                        opa: types::Opa::Mul,
+                    },
+                ))),
+            },
+        },
+        types::WhilelangType {
+            label: 5,
+            statement: types::Statement {
+                lValue: types::Stmt::Arithm(types::AExp::Var(types::Value::Var(String::from("y")))),
+                rValue: Some(types::Stmt::Arithm(types::AExp::AritheticOp(
+                    types::A1OpaA2 {
+                        a1: types::Value::Var(String::from("y")),
+                        a2: types::Value::Num(1),
+                        opa: types::Opa::Min,
+                    },
+                ))),
+            },
+        },
+    ];
+
+    let factorial: types::WhileProgram = vec![
+        types::WhilelangType {
+            label: 1,
+            statement: types::Statement {
+                lValue: types::Stmt::Arithm(types::AExp::Var(types::Value::Var(String::from("y")))),
+                rValue: Some(types::Stmt::Arithm(types::AExp::Var(types::Value::Var(
+                    String::from("x"),
+                )))),
+            },
+        },
+        types::WhilelangType {
+            label: 2,
+            statement: types::Statement {
+                lValue: types::Stmt::Arithm(types::AExp::Var(types::Value::Var(String::from("z")))),
+                rValue: Some(types::Stmt::Arithm(types::AExp::Var(types::Value::Num(1)))),
+            },
+        },
+        types::WhilelangType {
+            label: 3,
+            statement: types::Statement {
+                lValue: types::Stmt::While(types::While {
+                    cond: types::BExp::RelationalOp(types::A1OprA2 {
+                        a1: types::Value::Var(String::from("y")),
+                        a2: types::Value::Num(1),
+                        opr: types::Opr::Gt,
+                    }),
+                    statements: inner_loop,
+                }),
+                rValue: None,
+            },
+        },
+        types::WhilelangType {
+            label: 2,
+            statement: types::Statement {
+                lValue: types::Stmt::Arithm(types::AExp::Var(types::Value::Var(String::from("y")))),
+                rValue: Some(types::Stmt::Arithm(types::AExp::Var(types::Value::Num(0)))),
+            },
+        },
+    ];
 }
