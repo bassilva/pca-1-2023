@@ -70,69 +70,60 @@ fn main() {
     let inner_loop: types::WhileProgram = vec![
         types::WhilelangType {
             label: 4,
-            statement: types::Statement {
-                lValue: types::Stmt::Arithm(types::AExp::Var(types::Value::Var(String::from("z")))),
-                rValue: Some(types::Stmt::Arithm(types::AExp::AritheticOp(
-                    types::A1OpaA2 {
-                        a1: types::Value::Var(String::from("z")),
-                        a2: types::Value::Var(String::from("y")),
-                        opa: types::Opa::Mul,
-                    },
-                ))),
-            },
+            statement: types::Statement::Arithm(types::Arithm {
+                lValue: types::AExp::Var(String::from("z")),
+                rValue: types::AExp::AritheticOp(types::A1OpaA2 {
+                    a1: types::Value::Var(String::from("z")),
+                    a2: types::Value::Var(String::from("y")),
+                    opa: types::Opa::Mul,
+                }),
+            }),
         },
         types::WhilelangType {
             label: 5,
-            statement: types::Statement {
-                lValue: types::Stmt::Arithm(types::AExp::Var(types::Value::Var(String::from("y")))),
-                rValue: Some(types::Stmt::Arithm(types::AExp::AritheticOp(
-                    types::A1OpaA2 {
-                        a1: types::Value::Var(String::from("y")),
-                        a2: types::Value::Num(1),
-                        opa: types::Opa::Min,
-                    },
-                ))),
-            },
+            statement: types::Statement::Arithm(types::Arithm {
+                lValue: types::AExp::Var(String::from("y")),
+                rValue: types::AExp::AritheticOp(types::A1OpaA2 {
+                    a1: types::Value::Var(String::from("y")),
+                    a2: types::Value::Num(1),
+                    opa: types::Opa::Mul,
+                }),
+            }),
         },
     ];
 
     let factorial: types::WhileProgram = vec![
         types::WhilelangType {
             label: 1,
-            statement: types::Statement {
-                lValue: types::Stmt::Arithm(types::AExp::Var(types::Value::Var(String::from("y")))),
-                rValue: Some(types::Stmt::Arithm(types::AExp::Var(types::Value::Var(
-                    String::from("x"),
-                )))),
-            },
+            statement: types::Statement::Arithm(types::Arithm {
+                lValue: types::AExp::Var(String::from("y")),
+                rValue: types::AExp::Var(String::from("x")),
+            }),
         },
         types::WhilelangType {
             label: 2,
-            statement: types::Statement {
-                lValue: types::Stmt::Arithm(types::AExp::Var(types::Value::Var(String::from("z")))),
-                rValue: Some(types::Stmt::Arithm(types::AExp::Var(types::Value::Num(1)))),
-            },
+            statement: types::Statement::Arithm(types::Arithm {
+                lValue: types::AExp::Var(String::from("z")),
+                rValue: types::AExp::Num(1),
+            }),
         },
         types::WhilelangType {
             label: 3,
-            statement: types::Statement {
-                lValue: types::Stmt::While(types::While {
-                    cond: types::BExp::RelationalOp(types::A1OprA2 {
-                        a1: types::Value::Var(String::from("y")),
-                        a2: types::Value::Num(1),
-                        opr: types::Opr::Gt,
-                    }),
-                    statements: inner_loop,
+            statement: types::Statement::While(types::While {
+                cond: types::BExp::RelationalOp(types::A1OprA2 {
+                    a1: types::Value::Var(String::from("y")),
+                    a2: types::Value::Num(1),
+                    opr: types::Opr::Gt,
                 }),
-                rValue: None,
-            },
+                statements: inner_loop,
+            }),
         },
         types::WhilelangType {
             label: 2,
-            statement: types::Statement {
-                lValue: types::Stmt::Arithm(types::AExp::Var(types::Value::Var(String::from("y")))),
-                rValue: Some(types::Stmt::Arithm(types::AExp::Var(types::Value::Num(0)))),
-            },
+            statement: types::Statement::Arithm(types::Arithm {
+                lValue: types::AExp::Var(String::from("y")),
+                rValue: types::AExp::Num(0),
+            }),
         },
     ];
 }

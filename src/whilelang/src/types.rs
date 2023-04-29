@@ -45,8 +45,8 @@ pub struct A1OprA2 {
 }
 
 pub enum AExp {
-    Var(Value),
-    Num(Value),
+    Var(String),
+    Num(i32),
     AritheticOp(A1OpaA2),
 }
 
@@ -57,24 +57,29 @@ pub enum BExp {
     RelationalOp(A1OprA2),
 }
 
+pub struct Arithm {
+    pub lValue: AExp,
+    pub rValue: AExp,
+}
+
+pub struct Boolean {
+    lValue: BExp,
+    rValue: BExp,
+}
+
 pub struct While {
     pub cond: BExp,
     pub statements: WhileProgram,
 }
 
-pub enum Stmt {
-    Arithm(AExp),
-    Boolean(BExp),
+pub enum Statement {
+    Arithm(Arithm),
+    Boolean(Boolean),
     Skip,
     While(While),
     // S1s2(S1s2),
     // IfElse(IfElse),
     // While(While),
-}
-
-pub struct Statement {
-    pub lValue: Stmt,
-    pub rValue: Option<Stmt>,
 }
 
 pub struct WhilelangType {
