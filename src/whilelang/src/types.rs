@@ -47,7 +47,7 @@ pub struct A1OprA2 {
 pub enum AExp {
     Var(String),
     Num(i32),
-    AritheticOp(A1OpaA2),
+    ArithmeticOp(A1OpaA2),
 }
 
 pub enum BExp {
@@ -57,8 +57,8 @@ pub enum BExp {
     RelationalOp(A1OprA2),
 }
 
-pub struct Arithm {
-    pub lValue: AExp,
+pub struct Assignment {
+    pub lValue: String,
     pub rValue: AExp,
 }
 
@@ -73,7 +73,7 @@ pub struct While {
 }
 
 pub enum Statement {
-    Arithm(Arithm),
+    Assignment(Assignment),
     Boolean(Boolean),
     Skip,
     While(While),
@@ -87,4 +87,5 @@ pub struct WhilelangType {
     pub label: i32,
 }
 
+// TODO remove
 pub type WhileProgram = Vec<WhilelangType>;

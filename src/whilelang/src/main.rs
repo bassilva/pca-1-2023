@@ -1,3 +1,4 @@
+mod program;
 mod types;
 
 extern crate pest;
@@ -70,9 +71,9 @@ fn main() {
     let inner_loop: types::WhileProgram = vec![
         types::WhilelangType {
             label: 4,
-            statement: types::Statement::Arithm(types::Arithm {
-                lValue: types::AExp::Var(String::from("z")),
-                rValue: types::AExp::AritheticOp(types::A1OpaA2 {
+            statement: types::Statement::Assignment(types::Assignment {
+                lValue: String::from("z"),
+                rValue: types::AExp::ArithmeticOp(types::A1OpaA2 {
                     a1: types::Value::Var(String::from("z")),
                     a2: types::Value::Var(String::from("y")),
                     opa: types::Opa::Mul,
@@ -81,9 +82,9 @@ fn main() {
         },
         types::WhilelangType {
             label: 5,
-            statement: types::Statement::Arithm(types::Arithm {
-                lValue: types::AExp::Var(String::from("y")),
-                rValue: types::AExp::AritheticOp(types::A1OpaA2 {
+            statement: types::Statement::Assignment(types::Assignment {
+                lValue: String::from("y"),
+                rValue: types::AExp::ArithmeticOp(types::A1OpaA2 {
                     a1: types::Value::Var(String::from("y")),
                     a2: types::Value::Num(1),
                     opa: types::Opa::Mul,
@@ -95,15 +96,15 @@ fn main() {
     let factorial: types::WhileProgram = vec![
         types::WhilelangType {
             label: 1,
-            statement: types::Statement::Arithm(types::Arithm {
-                lValue: types::AExp::Var(String::from("y")),
+            statement: types::Statement::Assignment(types::Assignment {
+                lValue: String::from("y"),
                 rValue: types::AExp::Var(String::from("x")),
             }),
         },
         types::WhilelangType {
             label: 2,
-            statement: types::Statement::Arithm(types::Arithm {
-                lValue: types::AExp::Var(String::from("z")),
+            statement: types::Statement::Assignment(types::Assignment {
+                lValue: String::from("z"),
                 rValue: types::AExp::Num(1),
             }),
         },
@@ -120,8 +121,8 @@ fn main() {
         },
         types::WhilelangType {
             label: 2,
-            statement: types::Statement::Arithm(types::Arithm {
-                lValue: types::AExp::Var(String::from("y")),
+            statement: types::Statement::Assignment(types::Assignment {
+                lValue: String::from("y"),
                 rValue: types::AExp::Num(0),
             }),
         },
