@@ -1,0 +1,3 @@
+[submodule "src/pca_graphs_2023"]
+	path = src/pca_graphs_2023
+	url = https://github.com/faustocarva/pca_graphs_2023

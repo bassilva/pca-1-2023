@@ -1,3 +1,4 @@
+mod cfg;
 mod program;
 mod types;
 
@@ -87,7 +88,7 @@ fn main() {
                 rValue: types::AExp::ArithmeticOp(types::A1OpaA2 {
                     a1: types::Value::Var(String::from("y")),
                     a2: types::Value::Num(1),
-                    opa: types::Opa::Mul,
+                    opa: types::Opa::Min,
                 }),
             }),
         },
@@ -127,4 +128,7 @@ fn main() {
             }),
         },
     ];
+
+    let mut cfg = cfg::Cfg::new(factorial);
+    cfg.build();
 }
